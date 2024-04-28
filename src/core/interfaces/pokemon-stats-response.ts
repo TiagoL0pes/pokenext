@@ -1,5 +1,5 @@
 export interface PokemonStatsResponse {
-  id: number;
+  id: string;
   name: string;
   types: string[];
   abilities: Ability[];

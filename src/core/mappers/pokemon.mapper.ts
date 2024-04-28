@@ -4,7 +4,7 @@ import { Capitalize } from "../utils/string.utils";
 
 export const PokemonMapper = {
   toPokemonStatsResponse: (pokemon: PokemonStatsApi): PokemonStatsResponse => {
-    const id = pokemon.id;
+    const id = `#${pokemon.id.toString().padStart(4, "0")}`;
     const name = Capitalize(pokemon.name);
     const sound = pokemon.cries.latest;
     const sprite = pokemon.sprites.other["official-artwork"].front_default;

@@ -6,7 +6,9 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
-  const GET_POKEMON_BY_NAME = `${process.env.POKEAPI_URL}/pokemon/${req.query.name}`;
+  const param = (req.query.name as string).toLowerCase();
+
+  const GET_POKEMON_BY_NAME = `${process.env.POKEAPI_URL}/pokemon/${param}`;
 
   const response = await fetch(GET_POKEMON_BY_NAME);
 
