@@ -1,5 +1,5 @@
-import { PokemonStatsApi } from "@/core/interfaces/pokemon-stats-api";
-import { PokemonMapper } from "@/core/mappers/pokemon.mapper";
+import { PokemonStatsApi } from "@/core/interfaces/PokemonStatsApi";
+import { PokemonMapper } from "@/core/mappers/PokemonMapper";
 import { NextApiRequest, NextApiResponse } from "next";
 
 export default async function handler(

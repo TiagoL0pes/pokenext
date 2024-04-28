@@ -1,6 +1,6 @@
-import { PokemonStatsApi } from "../interfaces/pokemon-stats-api";
-import { PokemonStatsResponse } from "../interfaces/pokemon-stats-response";
-import { Capitalize } from "../utils/string.utils";
+import { PokemonStatsApi } from "../interfaces/PokemonStatsApi";
+import { PokemonStatsResponse } from "../interfaces/PokemonStatsResponse";
+import { Capitalize } from "../utils/StringUtils";
 
 export const PokemonMapper = {
   toPokemonStatsResponse: (pokemon: PokemonStatsApi): PokemonStatsResponse => {
