@@ -1,6 +1,7 @@
 "use client";
 
 import Card from "@/core/components/Card";
+import Loading from "@/core/components/Loading";
 import { PokemonStatsResponse } from "@/core/interfaces/PokemonStatsResponse";
 import { useEffect, useState } from "react";
 
@@ -38,8 +39,8 @@ export default function Home() {
 
   return (
     <main className="grid place-items-center">
-      <div className="w-full md:w-1/4">
-        <h1 className="text-center font-bold">Welcome to PokeNext</h1>
+      <div className="w-full">
+        <h1 className="text-center text-4xl font-bold">Welcome to PokeNext</h1>
 
         <input
           type="text"
@@ -58,7 +59,7 @@ export default function Home() {
 
       {error && !loading ? "No result found, try again!" : null}
 
-      {loading ? "Loading..." : null}
+      {loading ? <Loading /> : null}
 
       {pokemon && !error && !loading ? <Card pokemon={pokemon} /> : null}
     </main>
