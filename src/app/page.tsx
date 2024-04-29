@@ -1,9 +1,9 @@
 "use client";
 
 import Card from "@/core/components/Card";
-import Loading from "@/core/components/Loading";
-import NotFound from "@/core/components/NotFound";
+import UserFeedback from "@/core/components/UserFeedback";
 import { PokemonStatsResponse } from "@/core/interfaces/PokemonStatsResponse";
+import { MagnifyingGlass } from "@phosphor-icons/react";
 import { useState } from "react";
 
 export default function Home() {
@@ -24,11 +24,11 @@ export default function Home() {
 
         const response = await fetch(`/api/v1/pokemon/${name}`);
         if (!response.ok) {
-          throw new Error("Failed to fetch data");
+          const error = await response.json();
+          throw new Error(error);
         }
 
         const pokemon = await response.json();
-
         setPokemon(pokemon);
       } catch (error) {
         setError(error);
@@ -38,33 +38,55 @@ export default function Home() {
     }
   };
 
+  const canShowWelcome = !pokemon && !loading && !error;
+  const canShowNotFound = error && !loading;
+  const canShowCard = pokemon && !loading && !error;
+
   return (
     <main className="grid place-items-center">
       <div className="w-full">
-        <h1 className="text-center text-4xl font-bold">Welcome to PokeNext</h1>
+        <h1 className="text-center text-4xl font-bold title">Welcome to PokeNext</h1>
 
-        <input
-          type="text"
-          placeholder="Search"
-          className="my-8 shadow border rounded w-full py-2 px-3 text-gray-700 leading-tight"
-          value={name}
-          onChange={(e) => setName(e.target.value)}
-          onKeyDown={handleKeyPress}
-          readOnly={loading}
-        />
+        <label className="relative block">
+          <MagnifyingGlass className="text-gray-400 pointer-events-none w-8 h-8 absolute top-1/2 transform -translate-y-4 right-3" />
+          <input
+            type="text"
+            placeholder="Search"
+            className="my-8 shadow border rounded w-full py-2 px-3 text-gray-700 leading-tight bg-gray-200"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+            onKeyDown={handleKeyPress}
+            readOnly={loading}
+          />
+        </label>
       </div>
 
-      {!pokemon && !loading && !error ? (
-        <p>
-          Welcome to PokeNext, type Pokemon's name or ID and click to search
-        </p>
+      {canShowWelcome ? (
+        <UserFeedback
+          imgSrc="/welcome.png"
+          imgAlt="welcome image"
+          message="Welcome to PokeNext, type Pokemon's name or ID and click to search"
+        />
       ) : null}
 
-      {error && !loading ? <NotFound /> : null}
+      {canShowNotFound ? (
+        <UserFeedback
+          imgSrc="/not-found.png"
+          imgAlt="not found image"
+          message="No result found, try again!"
+        />
+      ) : null}
 
-      {loading ? <Loading /> : null}
+      {loading ? (
+        <UserFeedback
+          imgSrc="/pokeball.png"
+          imgAlt="loading image"
+          message="Loading..."
+          animation="infinite-spin"
+        />
+      ) : null}
 
-      {pokemon && !error && !loading ? <Card pokemon={pokemon} /> : null}
+      {canShowCard ? <Card pokemon={pokemon} /> : null}
     </main>
   );
 }
