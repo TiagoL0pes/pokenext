@@ -1,3 +1,4 @@
+import { StatEnum } from "../enums/StatEnum";
 import { PokemonStatsApi } from "../interfaces/PokemonStatsApi";
 import { PokemonStatsResponse } from "../interfaces/PokemonStatsResponse";
 import { Capitalize } from "../utils/StringUtils";

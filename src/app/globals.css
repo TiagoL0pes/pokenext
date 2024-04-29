@@ -6,6 +6,10 @@
   --foreground-rgb: 0, 0, 0;
   --background-start-rgb: 214, 219, 220;
   --background-end-rgb: 255, 255, 255;
+  --primary: #4dacf5;
+  --light: #1f2d40;
+  --dark: #17212f;
+  --text: #e2e4e6;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -20,14 +24,21 @@ body {
   margin: 0 auto;
   max-width: 1600px;
   padding: 24px;
+  background: var(--dark);
 }
 
 @layer base {
   h1 {
     @apply text-2xl;
+    color: #fff;
   }
   h2 {
     @apply text-xl;
+    color: #fff;
+  }
+
+  p {
+    color: #fff;
   }
 }
 

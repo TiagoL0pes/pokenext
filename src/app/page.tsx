@@ -2,8 +2,9 @@
 
 import Card from "@/core/components/Card";
 import Loading from "@/core/components/Loading";
+import NotFound from "@/core/components/NotFound";
 import { PokemonStatsResponse } from "@/core/interfaces/PokemonStatsResponse";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 export default function Home() {
   const [lastSearch, setLastSearch] = useState("");
@@ -45,7 +46,7 @@ export default function Home() {
         <input
           type="text"
           placeholder="Search"
-          className="mt-8 mb-48 shadow border rounded w-full py-2 px-3 text-gray-700 leading-tight"
+          className="my-8 shadow border rounded w-full py-2 px-3 text-gray-700 leading-tight"
           value={name}
           onChange={(e) => setName(e.target.value)}
           onKeyDown={handleKeyPress}
@@ -53,11 +54,13 @@ export default function Home() {
         />
       </div>
 
-      {!pokemon && !loading
-        ? "Welcome to PokeNext, type Pokemon's name or ID and click to search"
-        : null}
+      {!pokemon && !loading && !error ? (
+        <p>
+          Welcome to PokeNext, type Pokemon's name or ID and click to search
+        </p>
+      ) : null}
 
-      {error && !loading ? "No result found, try again!" : null}
+      {error && !loading ? <NotFound /> : null}
 
       {loading ? <Loading /> : null}
 
