@@ -1,6 +1,6 @@
 import { SpeakerHigh } from "@phosphor-icons/react";
 import Image from "next/image";
-import { PokemonStatsResponse } from "../../interfaces/PokemonStatsResponse";
+import { PokemonStatsResponse } from "../../core/interfaces/PokemonStatsResponse";
 import styles from "./styles.module.css";
 
 interface CardProps {
@@ -39,7 +39,7 @@ export default function Card({ pokemon }: CardProps) {
             <p className="font-bold">
               {pokemon?.types?.length === 1 ? "Type" : "Types"}
             </p>
-            {pokemon?.types?.map((type, index) => (
+            {pokemon?.types?.map((type: string, index: number) => (
               <p key={index}>{type}</p>
             ))}
           </div>

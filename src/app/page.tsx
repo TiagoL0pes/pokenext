@@ -1,7 +1,7 @@
 "use client";
 
-import Card from "@/core/components/Card";
-import UserFeedback from "@/core/components/UserFeedback";
+import Card from "@/components/Card";
+import UserFeedback from "@/components/UserFeedback";
 import { PokemonStatsResponse } from "@/core/interfaces/PokemonStatsResponse";
 import { MagnifyingGlass } from "@phosphor-icons/react";
 import { useState } from "react";
@@ -45,7 +45,9 @@ export default function Home() {
   return (
     <main className="grid place-items-center">
       <div className="w-full">
-        <h1 className="text-center text-4xl font-bold title">Welcome to PokeNext</h1>
+        <h1 className="text-center text-4xl font-bold title">
+          Welcome to PokeNext
+        </h1>
 
         <label className="relative block">
           <MagnifyingGlass className="text-gray-400 pointer-events-none w-8 h-8 absolute top-1/2 transform -translate-y-4 right-3" />
