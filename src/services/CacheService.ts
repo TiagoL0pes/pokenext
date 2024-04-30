@@ -21,10 +21,10 @@ const CacheService = {
     try {
       const value = await redis.get(key);
       if (!value) {
-        throw new Error(`Error getting value from ${key} key`);
+        throw new Error(`Error getting value ${key} from cache`);
       }
 
-      console.log(`[LOG]: Successfully got ${key} value`);
+      console.log(`[LOG]: Successfully got ${key} from cache`);
 
       return JSON.parse(value);
     } catch (error) {
@@ -39,12 +39,12 @@ const CacheService = {
 
     try {
       await redis.set(key, JSON.stringify(value));
-      await redis.expire(key, 30);
-      console.log(`[LOG]: ${key} set successfully`);
+      await redis.expire(key, WEEK);
+      console.log(`[LOG]: ${key} set successfully in cache`);
 
       return true;
     } catch (error) {
-      console.error(`[ERROR]: Error setting key ${key}:`, error);
+      console.error(`[ERROR]: Error setting key ${key} in cache`, error);
 
       return false;
     } finally {

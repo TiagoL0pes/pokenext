@@ -4,7 +4,7 @@ import Card from "@/components/Card";
 import UserFeedback from "@/components/UserFeedback";
 import { PokemonStatsResponse } from "@/core/interfaces/PokemonStatsResponse";
 import { MagnifyingGlass } from "@phosphor-icons/react";
-import { useState } from "react";
+import { DetailedHTMLProps, InputHTMLAttributes, useState } from "react";
 
 export default function Home() {
   const [lastSearch, setLastSearch] = useState("");
@@ -13,9 +13,14 @@ export default function Home() {
     undefined
   );
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(null);
+  const [error, setError] = useState<string | null>(null);
 
-  const handleKeyPress = async (event) => {
+  const handleKeyPress = async (
+    event: DetailedHTMLProps<
+      InputHTMLAttributes<HTMLInputElement>,
+      HTMLInputElement
+    >
+  ) => {
     if (event.key === "Enter" && lastSearch !== name && name) {
       try {
         setLastSearch(name);
@@ -30,8 +35,8 @@ export default function Home() {
 
         const pokemon = await response.json();
         setPokemon(pokemon);
-      } catch (error) {
-        setError(error);
+      } catch (error: unknown) {
+        setError(error as string);
       } finally {
         setLoading(false);
       }
