@@ -1,36 +1,38 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# PokeNext
 
-## Getting Started
+This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app) to show pokemon details with data provided from [PokeAPI](https://pokeapi.co/).
 
-First, run the development server:
+## Requirements
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+- Node 20
+- Docker
+- Redis
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Technologies
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+- React to build UI Components
+- Tailwind to style UI Components
+- Nextjs to implement API routes and serve application
+- Redis to store data in cache
+- Docker to run application and its dependencies
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+## Layout
 
-## Learn More
+<div align="center">
+  <img src="./public/github/welcome.png" width="250" alt="welcome">
+  <img src="./public/github/not-found.png" width="250" alt="not found">
+  <img src="./public/github/loading.png" width="250" alt="loading">
+</div>
+<div align="center">
+  <img src="./public/github/eevee.png" width="250" alt="eevee">
+</div>
 
-To learn more about Next.js, take a look at the following resources:
+## Running project
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### With Docker
+Once project is dockerized, just run `docker-compose up` to execute build, start Redis instance and Nextjs application on http://localhost:3000.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+### Without Docker
+**Attention**: To run this project without Docker you make sure Redis is running on your machine to avoid unexpected behavior.
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+Run `npm install` to install all project dependencies and run `npm run dev` to execute the app in development mode or run `npm run build` followed by `npm start` to execute the app in production mode, after that the application will be served on http://localhost:3000. 

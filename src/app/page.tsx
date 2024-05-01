@@ -15,6 +15,27 @@ export default function Home() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
+  const fetchData = async () => {
+    try {
+      setLastSearch(name);
+      setLoading(true);
+      setError(null);
+
+      const response = await fetch(`/api/v1/pokemon/${name}`);
+      if (!response.ok) {
+        const error = await response.json();
+        throw new Error(error);
+      }
+
+      const pokemon = await response.json();
+      setPokemon(pokemon);
+    } catch (error: unknown) {
+      setError(error as string);
+    } finally {
+      setLoading(false);
+    }
+  };
+
   const handleKeyPress = async (
     event: DetailedHTMLProps<
       InputHTMLAttributes<HTMLInputElement>,
@@ -22,24 +43,7 @@ export default function Home() {
     >
   ) => {
     if (event.key === "Enter" && lastSearch !== name && name) {
-      try {
-        setLastSearch(name);
-        setLoading(true);
-        setError(null);
-
-        const response = await fetch(`/api/v1/pokemon/${name}`);
-        if (!response.ok) {
-          const error = await response.json();
-          throw new Error(error);
-        }
-
-        const pokemon = await response.json();
-        setPokemon(pokemon);
-      } catch (error: unknown) {
-        setError(error as string);
-      } finally {
-        setLoading(false);
-      }
+      fetchData();
     }
   };
 

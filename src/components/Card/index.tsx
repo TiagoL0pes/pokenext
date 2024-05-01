@@ -52,7 +52,7 @@ export default function Card({ pokemon }: CardProps) {
               <div>
                 <p className="font-bold">Hidden Ability</p>
                 <p>
-                  {pokemon?.abilities?.find((a) => a.isHidden)?.name ?? "-"}
+                  {pokemon?.abilities?.find((a) => a.isHidden)?.name || "-"}
                 </p>
               </div>
             </div>
